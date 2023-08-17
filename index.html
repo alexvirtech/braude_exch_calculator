@@ -41,6 +41,7 @@
         fetch(url)
         .then(response => response.json())
         .then(data => {
+            console.log(data)
             const fromC = document.getElementById("fromC")
             const toC = document.getElementById("toC")
             const fromCurrency = "BTC"
