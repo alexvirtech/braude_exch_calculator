@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="pb-6">
     <div class="max-w-[300px] mx-auto">
         <div class="text-3xl py-6">Exchange Calculator</div>
@@ -13,53 +15,23 @@
             <div class="">
                 <div><b>From currency</b></div>
                 <div class="flex justify-left gap-2 pt-1 pb-3 text-xl">
-                    <select class="w-auto py-1 px-2 bg-transparent">
-                        <option>USD</option>
-                        <option selected>BTC</option>
-                        <option>ETH</option>
-                        <option>BNB</option>
-                    </select>
-                    <div class="grow"><input id="fromC" type="number" step="0.0001" min="0" class="border border-gray-300 rounded-md py-1 px-2"/></div>                    
+                    <select class="w-auto py-1 px-2 bg-transparent" id="from"></select>
+                    <div class="grow"><input id="fromC" type="number" step="0.0001" min="0"
+                            class="border border-gray-300 rounded-md py-1 px-2" /></div>
                 </div>
             </div>
             <div>
                 <div><b>To currency</b></div>
                 <div class="flex justify-left gap-2 pt-1 pb-3 text-xl">
-                    <select class="w-auto py-1 px-2 bg-transparent">
-                        <option selected>USD</option>
-                        <option>BTC</option>
-                        <option>ETH</option>
-                        <option>BNB</option>
-                    </select>
-                    <input id="toC" type="number" step="0.0001" min="0" class="border border-gray-300 rounded-md grow py-1 px-2">
+                    <select class="w-auto py-1 px-2 bg-transparent" id="to"></select>
+                    <input id="toC" type="number" step="0.0001" min="0"
+                        class="border border-gray-300 rounded-md grow py-1 px-2">
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        const url = "https://mtw-api-app-775a39b811e0.herokuapp.com/tickers/all"
-        fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            const fromC = document.getElementById("fromC")
-            const toC = document.getElementById("toC")
-            const fromCurrency = "BTC"
-            const toCurrency = "USD"
-            const fromPrice = parseFloat(data[fromCurrency].p) //[toCurrency]
-            const toPrice = toCurrency === 'USD' ? 1 : parseFloat(data[toCurrency].p) //[fromCurrency]
-
-            fromC.value = 1
-            toC.value = fromPrice/toPrice
-            fromC.addEventListener("input", () => {
-                toC.value = fromC.value * fromPrice / toPrice
-            })
-            toC.addEventListener("input", () => {
-                fromC.value = toC.value *  toPrice / fromPrice 
-            })
-        })
-    </script>
-    <script src="./inc/test.js"></script>
-   <script src="https://morethanwallet.com/appstore/index.js"></script>
+    <script src="./inc/script.js"></script>
+    <script src="https://morethanwallet.com/appstore/index.js"></script>
 </body>
+
 </html>
