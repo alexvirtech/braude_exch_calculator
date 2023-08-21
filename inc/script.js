@@ -1,10 +1,4 @@
 const url = "https://api.mtw-testnet.com/tickers/all"
-const $from = document.getElementById("from")
-const $to = document.getElementById("to")
-const $fromC = document.getElementById("fromC")
-const $toC = document.getElementById("toC")
-const fromDefault = "BTC"
-const toDefault = "USD"
 let priceData = {}
 
 const formatTimestamp = (timestamp) => {
@@ -18,65 +12,40 @@ const formatTimestamp = (timestamp) => {
 
     return `${hours}:${minutes}:${seconds} ${day}/${month}`
 }
-
-const createOptions = ($el, def) => {
-    for (const key in priceData) {
-        const option = document.createElement("option")
-        option.value = key
-        option.innerText = key
-        if (key === def) option.selected = true
-        $el.appendChild(option)
-    }
-}
-
 const prepareData = (data) => {
     const preparedData = {}
     for (const key in data) {
         preparedData[key] = {
             time: formatTimestamp(data[key].t),
-            price: parseFloat(data[key].p)
+            price: parseFloat(data[key].p),
+            change: parseFloat(data[key].c)
         }
     }
-    preparedData['USD'] = { price: 1 }
     return preparedData
 }
 
-const calculate = (src) => {
-    const fromPrice = parseFloat(priceData[$from.value].price) 
-    const toPrice = parseFloat(priceData[$to.value].price)
-    if(src === "from") {
-        $toC.value = $fromC.value * fromPrice / toPrice
-    }  else {
-        $fromC.value = $toC.value * toPrice / fromPrice
+const createTable = (data) => {
+    const table = document.getElementById('price-table')
+    for (const key in data) {
+        createRow(table,data,key)        
     }
+}
 
+const createRow = (table,data,key) => {
+    const row = table.insertRow()
+        const cell1 = row.insertCell(0)
+        const cell2 = row.insertCell(1)
+        const cell3 = row.insertCell(2)
+        cell1.innerHTML = '<b>' + key + '</b>'
+        cell2.innerHTML = data[key].price
+        const color= data[key].change > 0 ? 'green' : 'red'
+        cell3.innerHTML = '<b class="text-' + color + '-500">' + data[key].change + '</b>'
 }
 
 fetch(url)
     .then(response => response.json())
     .then(data => {
-        //console.log(data)
-        priceData = prepareData(data)
-        createOptions($from, fromDefault)
-        createOptions($to, toDefault)
-        console.log(priceData)
-        $fromC.value = 1
-        calculate("from")
-
-        $fromC.addEventListener("input", () => {
-            calculate("from")
-        })
-        $toC.addEventListener("input", () => {
-            calculate("to")
-        })
-
-        $from.addEventListener("change", () => {
-            $fromC.value = 1
-            calculate("from")
-        })
-        $to.addEventListener("change", () => {
-            $fromC.value = 1
-            calculate("from")
-        })
-        
+        console.log(data)
+        priceData = prepareData(data)    
+        createTable(priceData)    
     })
