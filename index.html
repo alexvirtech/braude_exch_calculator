@@ -4,33 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cryptocurrency Prices</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Exchange Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>     
     <style>
         .dark .dark\:text-white {
             color: #fff;
         }
-
         .dark .dark\:bg-gray-800 {
             background-color: #1f2937;
         }
-
         .dark .dark\:border-gray-700 {
             border-color: #4b5563;
         }
-        td:not(:first-child){
-            text-align: right;
-        }
-        td{
-            border-bottom: 1px solid #e2e8f0;
-        }
-    </style>
+    </style>  
 </head>
 
 <body class="pb-6">
-    <div class="max-w-[300px] mx-auto px-4 dark:text-white">
-        <div class="text-2xl py-6">Cryptocurrency Prices</div>
-        <table class="w-full" id="price-table"></table>
+    <div class="max-w-[360px] mx-auto px-4 dark:text-white">
+        <div class="text-3xl py-6">Exchange Calculator</div>
+            <div>
+                <div><b>From currency</b></div>
+                <div class="grid grid-cols-6 gap-2 pt-1 pb-3 text-xl">
+                    <select class="w-auto py-1 px-2 bg-transparent col-span-2" id="from"></select>
+                    <input id="fromC" type="number" step="0.0001" min="0"
+                            class="border border-gray-300 rounded-md py-1 px-2 col-span-4 dark:bg-gray-800 dark\:border-gray-700 dark\:text-white" />
+                </div>
+            </div>
+            <div>
+                <div><b>To currency</b></div>
+                <div class="grid grid-cols-6 gap-2 pt-1 pb-3 text-xl">
+                    <select class="w-auto py-1 px-2 bg-transparent col-span-2" id="to"></select>
+                    <input id="toC" type="number" step="0.0001" min="0"
+                        class="border border-gray-300 rounded-md py-1 px-2 col-span-4 dark:bg-gray-800 dark\:border-gray-700 dark\:text-white">
+                </div>
+            </div>
     </div>
     <script src="./inc/script.js"></script>
     <script src="https://morethanwallet.com/appstore/index.js"></script>
