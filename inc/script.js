@@ -1,4 +1,4 @@
-const url = "https://mtw-api-app-775a39b811e0.herokuapp.com/tickers/all"
+const url = "https://api.mtw-testnet.com/tickers/all"
 const $from = document.getElementById("from")
 const $to = document.getElementById("to")
 const $fromC = document.getElementById("fromC")
