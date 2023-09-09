@@ -1,4 +1,5 @@
-const url = "https://api.mtw-testnet.com/tickers/all"
+const url = "https://mtickers.mtw-testnet.com/data" //"https://api.mtw-testnet.com/tickers/all"
+
 const $from = document.getElementById("from")
 const $to = document.getElementById("to")
 const $fromC = document.getElementById("fromC")
